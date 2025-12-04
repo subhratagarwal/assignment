@@ -17,13 +17,19 @@ export async function createTask(req: Request, res: Response) {
 export async function listTasks(req: Request, res: Response) {
   try {
     const userId = Number(req.user?.id);
-    const tasks = await taskService.listTasks(userId);
-    return res.json(tasks);
+    const page = Number(req.query.page || 1);
+    const pageSize = Number(req.query.pageSize || 10);
+    const status = (req.query.status as string) || undefined;
+    const q = (req.query.q as string) || undefined;
+
+    const result = await taskService.listTasks(userId, { page, pageSize, status, q });
+    return res.json(result);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "internal error" });
   }
 }
+
 
 export async function getTask(req: Request, res: Response) {
   try {
