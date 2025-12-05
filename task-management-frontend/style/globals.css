@@ -1,0 +1,4 @@
+html,body,#__next { height: 100%; }
+body { font-family: Inter, Arial, sans-serif; margin: 0; color: #111; }
+input { padding: 8px; margin-right: 8px; }
+button { padding: 8px 12px; }
